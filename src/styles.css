@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+
+body {
+  background-image: url('/assets/bg.jpg');
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position-x: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link {
+  color: #bdf3ce;
+}
+
+a:hover, a:focus {
+  color: #1B9742;
+}
