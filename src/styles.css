@@ -2,6 +2,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300');
 
 body {
+  display: flex;
+  justify-content: center;
   background-image: url('/assets/bg.jpg');
   -webkit-background-size: cover;
   background-size: cover;
@@ -21,4 +23,9 @@ a:link {
 
 a:hover, a:focus {
   color: #1B9742;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
 }
