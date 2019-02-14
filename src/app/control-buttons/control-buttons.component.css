@@ -1,0 +1,24 @@
+.button-controls {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.control-button {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin: 0 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background-color: #006f00;
+  transition: background-color 0.2s, border-color 0.2s;
+  border: 3px solid #004d00;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+
+.control-button:hover, .control-button:focus {
+  background-color: #005e00;
+  border-color: #003c00;
+}
