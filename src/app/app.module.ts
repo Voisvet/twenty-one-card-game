@@ -3,10 +3,16 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TableComponent } from './table/table.component';
+import { ControlButtonsComponent } from './control-buttons/control-buttons.component';
+import { ChipsControlsComponent } from './chips-controls/chips-controls.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TableComponent,
+    ControlButtonsComponent,
+    ChipsControlsComponent
   ],
   imports: [
     BrowserModule,
