@@ -1,0 +1,52 @@
+.chip-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.chip {
+  border-radius: 50px;
+  height: 5rem;
+  width: 5rem;
+  color: #ffffff;
+  font-size: 2rem;
+  border: 0.5rem dashed #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin: 10px;
+}
+
+.chip:disabled {
+  background-color: gray;
+  cursor: auto;
+}
+
+.red {
+  background-color: #8b0000;
+}
+
+.red:hover:enabled, .red:focus:enabled {
+  background-color: #7a0000;
+}
+
+.blue {
+  background-color: #2a52be;
+}
+
+.blue:hover:enabled, .blue:focus:enabled {
+  background-color: #274cb0;
+}
+
+.green {
+  background-color: #008000;
+}
+
+.green:hover:enabled, .green:focus:enabled {
+  background-color: #006f00;
+}
+
+.account {
+  margin-bottom: 8px;
+  font-size: 1.5rem;
+}
