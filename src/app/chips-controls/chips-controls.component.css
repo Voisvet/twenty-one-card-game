@@ -3,9 +3,12 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  margin-top: 16px;
 }
 
 .chip {
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
   border-radius: 50px;
   height: 5rem;
   width: 5rem;
