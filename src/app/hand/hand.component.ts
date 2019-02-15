@@ -20,6 +20,10 @@ export class HandComponent implements OnInit {
   }
 
   getHandWidth(): string {
-    return '' + (this.cards.length * 60 + 60) + 'px';
+    if (this.cards) {
+      return '' + (this.cards.length * 60 + 60) + 'px';
+    } else {
+      return '1px';
+    }
   }
 }
