@@ -16,4 +16,23 @@ export class AppComponent {
     'KH',
     '8C'
   ];
+
+  buttons = [
+    {
+      buttonName: 'Удвоить',
+      handler: this.doubleButtonClick
+    },
+    {
+      buttonName: 'Хватит',
+      handler: this.stopButtonClick
+    }
+  ];
+
+  doubleButtonClick() {
+    console.log(111);
+  }
+
+  stopButtonClick() {
+    console.log(222);
+  }
 }

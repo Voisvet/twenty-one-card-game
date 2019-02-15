@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+
+interface ControlButton {
+  buttonName: string;
+  handler: () => void;
+}
 
 @Component({
   selector: 'app-control-buttons',
@@ -6,6 +11,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./control-buttons.component.css']
 })
 export class ControlButtonsComponent implements OnInit {
+
+  @Input() buttonsList: [ControlButton];
 
   constructor() { }
 
