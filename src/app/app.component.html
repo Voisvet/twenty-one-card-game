@@ -3,8 +3,10 @@
   [dealerHand]="dealerHand"
   [playerHand]="playerHand"></app-table>
 <app-control-buttons
-  [buttonsList]="buttons"></app-control-buttons>
+  [buttonsList]="buttons"
+  (buttonClick)="buttonClickHandler($event)"></app-control-buttons>
 <app-chips-controls
+  *ngIf="isGameStarted"
   [bet]="bet"
   [balance]="balance"></app-chips-controls>
 <router-outlet></router-outlet>

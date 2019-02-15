@@ -8,12 +8,21 @@ import {ControlButton} from './control-buttons/control-buttons.component';
 })
 export class AppComponent {
   dealerHand: [string];
-
   playerHand: [string];
 
-  buttons: [ControlButton];
+  buttons: [ControlButton] = [
+    {
+      buttonName: 'Начать игру!',
+      eventType: 'game_start'
+    }
+  ];
 
+  isGameStarted = false;
   balance = 100;
+
+  buttonClickHandler(eventType: string) {
+    this.isGameStarted = true;
+  }
 
   doubleButtonClick() {
     console.log(111);

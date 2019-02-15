@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 export interface ControlButton {
   buttonName: string;
-  handler: () => void;
+  eventType: string;
 }
 
 @Component({
@@ -14,9 +14,15 @@ export class ControlButtonsComponent implements OnInit {
 
   @Input() buttonsList: [ControlButton];
 
+  @Output() buttonClick = new EventEmitter<string>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onButtonClick(eventType: string) {
+    this.buttonClick.emit(eventType);
   }
 
 }
