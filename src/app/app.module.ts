@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { TableComponent } from './table/table.component';
 import { ControlButtonsComponent } from './control-buttons/control-buttons.component';
 import { ChipsControlsComponent } from './chips-controls/chips-controls.component';
+import { HandComponent } from './hand/hand.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
     ControlButtonsComponent,
-    ChipsControlsComponent
+    ChipsControlsComponent,
+    HandComponent
   ],
   imports: [
     BrowserModule,

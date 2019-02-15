@@ -1,0 +1,16 @@
+<div class="hand" [ngStyle]="{width: getHandWidth()}">
+  <ng-container *ngFor="let card of cards; let i = index">
+    <img
+      *ngIf="i==0 && !isFirstCardShown; else faceUp"
+      class="card"
+      src="/assets/back.png"
+      alt="card">
+    <ng-template #faceUp>
+      <img
+        class="card"
+        [ngStyle]="{'left': getOffsetOfCard(i)}"
+        src="https://deckofcardsapi.com/static/img/{{card}}.png"
+        alt="card">
+    </ng-template>
+  </ng-container>
+</div>

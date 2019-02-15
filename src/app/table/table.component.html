@@ -1,18 +1,11 @@
 <div class="table">
   <div class="dealer-zone">
-    <img class="deck" src="/assets/back.png" alt="card">
-    <div class="hand">
-      <img class="card" src="/assets/back.png" alt="card">
-      <img class="card" src="https://deckofcardsapi.com/static/img/8C.png" alt="card">
-      <img class="card" src="https://deckofcardsapi.com/static/img/8C.png" alt="card">
-    </div>
+    <app-hand [cards]="dealerHand"></app-hand>
   </div>
   <div class="message-zone">
     Играете? Я с вами!
   </div>
   <div class="player-zone">
-    <div class="hand">
-      <img class="card" src="https://deckofcardsapi.com/static/img/8C.png" alt="card">
-    </div>
+    <app-hand [cards]="playerHand" isFirstCardShown="true"></app-hand>
   </div>
 </div>

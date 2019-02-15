@@ -1,0 +1,10 @@
+.card {
+  display: inline-block;
+  position: relative;
+  width: 120px;
+}
+
+.hand {
+  width: 120px;
+  white-space: nowrap;
+}

@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'twenty-one-card-game';
+  dealerHand = [
+    'KH',
+    '8C',
+    '8C'
+  ];
+
+  playerHand = [
+    'KH',
+    '8C'
+  ];
 }
