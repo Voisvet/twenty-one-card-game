@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ControlButton} from './control-buttons/control-buttons.component';
 
 @Component({
   selector: 'app-root',
@@ -6,27 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  dealerHand = [
-    'KH',
-    '8C',
-    '8C'
-  ];
+  dealerHand: [string];
 
-  playerHand = [
-    'KH',
-    '8C'
-  ];
+  playerHand: [string];
 
-  buttons = [
-    {
-      buttonName: 'Удвоить',
-      handler: this.doubleButtonClick
-    },
-    {
-      buttonName: 'Хватит',
-      handler: this.stopButtonClick
-    }
-  ];
+  buttons: [ControlButton];
 
   balance = 100;
 

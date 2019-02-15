@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 
-interface ControlButton {
+export interface ControlButton {
   buttonName: string;
   handler: () => void;
 }
