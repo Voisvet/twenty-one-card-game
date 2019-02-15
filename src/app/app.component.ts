@@ -28,11 +28,21 @@ export class AppComponent {
     }
   ];
 
+  balance = 100;
+
   doubleButtonClick() {
     console.log(111);
   }
 
   stopButtonClick() {
     console.log(222);
+  }
+
+  bet(amount: number) {
+    if (this.balance - amount >= 0) {
+      this.balance -= amount;
+    } else {
+      console.log('Whoops! Something went wrong');
+    }
   }
 }

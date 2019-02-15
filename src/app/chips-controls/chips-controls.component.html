@@ -1,8 +1,8 @@
 <div class="chip-controls">
-  <p class="account">Ваш банк: <b>0</b></p>
+  <p class="account">Ваш банк: <b>{{balance}}</b></p>
   <div>
-    <button class="chip red">1</button>
-    <button class="chip blue">5</button>
-    <button class="chip green">10</button>
+    <button class="chip red" (click)="bet(1)">1</button>
+    <button class="chip blue" (click)="bet(5)">5</button>
+    <button class="chip green" (click)="bet(10)">10</button>
   </div>
 </div>
