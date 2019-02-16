@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-chips-controls',
@@ -7,12 +7,17 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ChipsControlsComponent implements OnInit {
 
-  @Input() bet: (amount: number) => void;
   @Input() balance: number;
+
+  @Output() bet = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onChipClick(amount: number) {
+    this.bet.emit(amount);
   }
 
 }

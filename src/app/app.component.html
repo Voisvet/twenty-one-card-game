@@ -7,6 +7,6 @@
   (buttonClick)="buttonClickHandler($event)"></app-control-buttons>
 <app-chips-controls
   *ngIf="isGameStarted"
-  [bet]="bet"
+  (bet)="bet($event)"
   [balance]="balance"></app-chips-controls>
 <router-outlet></router-outlet>
