@@ -8,4 +8,5 @@
   width: 120px;
   height: 172px;
   white-space: nowrap;
+  transition: width 1s;
 }

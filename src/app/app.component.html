@@ -1,12 +1,18 @@
 <h1>BlackJack</h1>
 <app-table
   [dealerHand]="dealerHand"
-  [playerHand]="playerHand"></app-table>
+  [playerHand]="playerHand"
+  [message]="message">
+</app-table>
 <app-control-buttons
   [buttonsList]="buttons"
-  (buttonClick)="buttonClickHandler($event)"></app-control-buttons>
+  (buttonClick)="buttonClickHandler($event)">
+</app-control-buttons>
 <app-chips-controls
   *ngIf="isGameStarted"
-  (bet)="bet($event)"
-  [balance]="balance"></app-chips-controls>
+  (makeBet)="makeBet($event)"
+  [balance]="balance"
+  [bet]="bet"
+  [areChipsShown]="showChips">
+</app-chips-controls>
 <router-outlet></router-outlet>

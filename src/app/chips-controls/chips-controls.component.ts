@@ -8,8 +8,10 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class ChipsControlsComponent implements OnInit {
 
   @Input() balance: number;
+  @Input() bet: number;
+  @Input() areChipsShown: boolean;
 
-  @Output() bet = new EventEmitter<number>();
+  @Output() makeBet = new EventEmitter<number>();
 
   constructor() { }
 
@@ -17,7 +19,7 @@ export class ChipsControlsComponent implements OnInit {
   }
 
   onChipClick(amount: number) {
-    this.bet.emit(amount);
+    this.makeBet.emit(amount);
   }
 
 }
