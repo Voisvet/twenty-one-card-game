@@ -7,10 +7,11 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class HandComponent implements OnInit {
 
-  @Input() cards: [string];
+  @Input() cards: string[];
   @Input() isFirstCardShown: boolean;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

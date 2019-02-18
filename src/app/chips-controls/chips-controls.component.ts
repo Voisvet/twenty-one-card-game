@@ -1,25 +1,40 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {GameDataService} from '../game-data.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-chips-controls',
   templateUrl: './chips-controls.component.html',
   styleUrls: ['./chips-controls.component.css']
 })
-export class ChipsControlsComponent implements OnInit {
+export class ChipsControlsComponent implements OnInit, OnDestroy {
 
-  @Input() balance: number;
-  @Input() bet: number;
-  @Input() areChipsShown: boolean;
+  balance: number;
+  bet: number;
+  areChipsShown: boolean;
+  subscriptions: Subscription[] = [];
 
-  @Output() makeBet = new EventEmitter<number>();
-
-  constructor() { }
+  constructor(private gameDataService: GameDataService) {
+    this.subscriptions.push(
+      gameDataService.balance.subscribe(value => this.balance = value)
+    );
+    this.subscriptions.push(
+      gameDataService.bet.subscribe(value => this.bet = value)
+    );
+    this.subscriptions.push(
+      gameDataService.showChips.subscribe(value => this.areChipsShown = value)
+    );
+  }
 
   ngOnInit() {
   }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
   onChipClick(amount: number) {
-    this.makeBet.emit(amount);
+    this.gameDataService.makeBet(amount);
   }
 
 }

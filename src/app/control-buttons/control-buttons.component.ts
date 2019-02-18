@@ -1,4 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {GameDataService} from '../game-data.service';
+import {Subscription} from 'rxjs';
 
 export interface ControlButton {
   buttonName: string;
@@ -10,19 +12,24 @@ export interface ControlButton {
   templateUrl: './control-buttons.component.html',
   styleUrls: ['./control-buttons.component.css']
 })
-export class ControlButtonsComponent implements OnInit {
+export class ControlButtonsComponent implements OnInit, OnDestroy {
 
-  @Input() buttonsList: [ControlButton];
+  buttonsList: ControlButton[];
+  subscription: Subscription;
 
-  @Output() buttonClick = new EventEmitter<string>();
-
-  constructor() { }
+  constructor(private gameDataService: GameDataService) {
+    this.subscription = gameDataService.buttons.subscribe(value => this.buttonsList = value);
+  }
 
   ngOnInit() {
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   onButtonClick(eventType: string) {
-    this.buttonClick.emit(eventType);
+    this.gameDataService.buttonClickHandler(eventType);
   }
 
 }
