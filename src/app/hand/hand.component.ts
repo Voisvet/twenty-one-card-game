@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Card} from '../deck-api.service';
 
 @Component({
   selector: 'app-hand',
@@ -7,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class HandComponent implements OnInit {
 
-  @Input() cards: string[];
+  @Input() cards: Card[];
   @Input() isFirstCardShown: boolean;
 
   constructor() {

@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GameDataService} from '../game-data.service';
 import {Subscription} from 'rxjs';
+import {Card} from '../deck-api.service';
 
 @Component({
   selector: 'app-table',
@@ -8,8 +9,8 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit, OnDestroy {
-  playerHand: string[];
-  dealerHand: string[];
+  playerHand: Card[];
+  dealerHand: Card[];
   message: string;
   subscriptions: Subscription[] = [];
 
