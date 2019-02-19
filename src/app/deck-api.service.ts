@@ -38,8 +38,7 @@ export class DeckApiService {
   }
 
   drawCards(amount: number = 1) {
-    const params = new HttpParams();
-    params.append('count', amount.toString());
+    const params = new HttpParams().set('count', amount.toString());
 
     return this.http
       .get<DrawResponse>(this.basicUrl + '/' + this.deckId + '/draw/', {params})
