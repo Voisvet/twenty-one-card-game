@@ -8,6 +8,24 @@ import {Card, DeckApiService} from './deck-api.service';
 })
 export class GameDataService {
 
+  constructor(private deckApiService: DeckApiService) {
+  }
+
+  private static points = {
+    KING: 10,
+    QUEEN: 10,
+    JACK: 10,
+    10: 10,
+    9: 9,
+    8: 8,
+    7: 7,
+    6: 6,
+    5: 5,
+    4: 4,
+    3: 3,
+    2: 2
+  };
+
   isGameStartedSource = new BehaviorSubject<boolean>(false);
   showChipsSource = new BehaviorSubject<boolean>(false);
   messageSource = new BehaviorSubject<string>('Играете? Я с вами!');
@@ -34,22 +52,36 @@ export class GameDataService {
   private playerPoints: number;
   private dealerPoints: number;
 
-  private points = {
-    KING: 10,
-    QUEEN: 10,
-    JACK: 10,
-    10: 10,
-    9: 9,
-    8: 8,
-    7: 7,
-    6: 6,
-    5: 5,
-    4: 4,
-    3: 3,
-    2: 2
-  };
+  private static recalculatePoints(hand: Card[]): number {
+    console.log(hand);
+    let aceCost = 11;
+    let sum = hand.reduce((previousValue, currentValue) => {
+      return previousValue + (currentValue.value === 'ACE' ? aceCost : GameDataService.points[currentValue.value]);
+    }, 0);
 
-  constructor(private deckApiService: DeckApiService) {
+    if (sum > 21) {
+      aceCost = 1;
+      sum = hand.reduce((previousValue, currentValue) => {
+        return previousValue + (currentValue.value === 'ACE' ? aceCost : GameDataService.points[currentValue.value]);
+      }, 0);
+    }
+
+    return sum;
+  }
+
+  private static generatePointsMessage(amount: number): string {
+    if (amount % 10 === 1 && amount !== 11) {
+      return amount.toString() + ' очко';
+    } else if ((amount % 10 === 2
+              || amount % 10 === 3
+              || amount % 10 === 4)
+              && !(amount === 12
+              || amount === 13
+              || amount === 14)) {
+      return amount.toString() + ' очка';
+    } else {
+      return amount.toString() + ' очков';
+    }
   }
 
   buttonClickHandler(eventType: string) {
@@ -117,8 +149,9 @@ export class GameDataService {
   getCard() {
     this.deckApiService.drawCards().subscribe(
       cards => {
-        console.log(cards);
         this.playerHandSource.value.push(cards[0]);
+        this.playerPoints = GameDataService.recalculatePoints(this.playerHandSource.value);
+        this.messageSource.next('Вы собрали ' + GameDataService.generatePointsMessage(this.playerPoints));
       }
     );
   }
