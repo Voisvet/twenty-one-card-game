@@ -2,8 +2,8 @@
   <p class="account">Ваш банк: <b>{{balance}}</b></p>
   <p class="account">Текущая ставка: <b>{{bet}}</b></p>
   <div *ngIf="areChipsShown">
-    <button class="chip red" (click)="onChipClick(1)">1</button>
-    <button class="chip blue" (click)="onChipClick(5)">5</button>
-    <button class="chip green" (click)="onChipClick(10)">10</button>
+    <button class="chip red" [disabled]="balance < 1" (click)="onChipClick(1)">1</button>
+    <button class="chip blue" [disabled]="balance < 5" (click)="onChipClick(5)">5</button>
+    <button class="chip green" [disabled]="balance < 10" (click)="onChipClick(10)">10</button>
   </div>
 </div>
