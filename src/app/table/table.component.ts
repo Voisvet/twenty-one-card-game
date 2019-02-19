@@ -11,6 +11,7 @@ import {Card} from '../deck-api.service';
 export class TableComponent implements OnInit, OnDestroy {
   playerHand: Card[];
   dealerHand: Card[];
+  firstDealerCardShown: boolean;
   message: string;
   subscriptions: Subscription[] = [];
 
@@ -20,6 +21,9 @@ export class TableComponent implements OnInit, OnDestroy {
     );
     this.subscriptions.push(
       this.gameDataService.dealerHand.subscribe(value => this.dealerHand = value)
+    );
+    this.subscriptions.push(
+      this.gameDataService.showFirstDealerCard.subscribe(value => this.firstDealerCardShown = value)
     );
     this.subscriptions.push(
       this.gameDataService.playerHand.subscribe(value => this.playerHand = value)

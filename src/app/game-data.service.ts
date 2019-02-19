@@ -28,6 +28,7 @@ export class GameDataService {
 
   isGameStartedSource = new BehaviorSubject<boolean>(false);
   showChipsSource = new BehaviorSubject<boolean>(false);
+  showFirstDealerCardSource = new BehaviorSubject<boolean>(false);
   messageSource = new BehaviorSubject<string>('Играете? Я с вами!');
   balanceSource = new BehaviorSubject<number>(100);
   betSource = new BehaviorSubject<number>(0);
@@ -42,6 +43,7 @@ export class GameDataService {
 
   isGameStarted = this.isGameStartedSource.asObservable();
   showChips = this.showChipsSource.asObservable();
+  showFirstDealerCard = this.showFirstDealerCardSource.asObservable();
   message = this.messageSource.asObservable();
   balance = this.balanceSource.asObservable();
   bet = this.betSource.asObservable();
@@ -128,6 +130,8 @@ export class GameDataService {
 
   startDealing() {
     this.showChipsSource.next(false);
+
+    this.showFirstDealerCardSource.next(false);
 
     this.deckApiService.drawCards(4).subscribe(cards => {
       this.dealerHandSource.value.push(cards[0]);
