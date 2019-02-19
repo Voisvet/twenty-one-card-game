@@ -37,13 +37,13 @@ export class DeckApiService {
     );
   }
 
-  drawCard() {
+  drawCards(amount: number = 1) {
     const params = new HttpParams();
-    params.append('count', '1');
+    params.append('count', amount.toString());
 
     return this.http
       .get<DrawResponse>(this.basicUrl + '/' + this.deckId + '/draw/', {params})
-      .pipe(map(value => value.cards[0]));
+      .pipe(map(value => value.cards));
   }
 
   reshuffleDeck() {
