@@ -107,12 +107,12 @@ export class GameDataService {
 
   startGame() {
     this.isGameStartedSource.next(true);
+    this.deckApiService.reshuffleDeck().subscribe();
+
+    this.betSource.next(0);
 
     this.playerHandSource.next([]);
     this.dealerHandSource.next([]);
-
-    this.playerPoints = 0;
-    this.dealerPoints = 0;
 
     this.showChipsSource.next(true);
     this.messageSource.next('Сделайте вашу ставку');
@@ -127,6 +127,16 @@ export class GameDataService {
 
   startDealing() {
     this.showChipsSource.next(false);
+
+    this.deckApiService.drawCards(4).subscribe(cards => {
+      this.dealerHandSource.value.push(cards[0]);
+      this.dealerHandSource.value.push(cards[1]);
+      this.playerHandSource.value.push(cards[2]);
+      this.playerHandSource.value.push(cards[3]);
+    });
+
+    this.playerPoints = GameDataService.recalculatePoints(this.playerHandSource.value);
+    this.dealerPoints = GameDataService.recalculatePoints(this.dealerHandSource.value);
 
     this.messageSource.next('Хорошей игры!');
 
@@ -151,9 +161,37 @@ export class GameDataService {
       cards => {
         this.playerHandSource.value.push(cards[0]);
         this.playerPoints = GameDataService.recalculatePoints(this.playerHandSource.value);
-        this.messageSource.next('Вы собрали ' + GameDataService.generatePointsMessage(this.playerPoints));
+        if (this.playerPoints < 21) {
+          this.messageSource.next('Вы собрали ' + GameDataService.generatePointsMessage(this.playerPoints));
+        } else if (this.playerPoints === 21) {
+          this.blackJack();
+        } else {
+          this.tooMuch();
+        }
       }
     );
+  }
+
+  blackJack() {
+    this.messageSource.next('Вы собрали блекджек! Ещё одну?');
+
+    this.buttonsSource.next([
+      {
+        buttonName: 'Давай!',
+        eventType: 'game_start'
+      }
+    ]);
+  }
+
+  tooMuch() {
+    this.messageSource.next('Упс, перебор. Сыграем ещё?');
+
+    this.buttonsSource.next([
+      {
+        buttonName: 'Давай!',
+        eventType: 'game_start'
+      }
+    ]);
   }
 
   stopDrawing() {
