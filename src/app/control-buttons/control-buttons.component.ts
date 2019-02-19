@@ -5,6 +5,7 @@ import {Subscription} from 'rxjs';
 export interface ControlButton {
   buttonName: string;
   eventType: string;
+  disabled?: boolean;
 }
 
 @Component({

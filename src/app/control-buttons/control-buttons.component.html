@@ -3,6 +3,7 @@
     *ngFor="let button of buttonsList"
     class="control-button"
     (click)="onButtonClick(button.eventType)"
+    [disabled]="button.disabled"
   >
     {{button.buttonName}}
   </button>
