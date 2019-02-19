@@ -120,7 +120,8 @@ export class GameDataService {
     this.buttonsSource.next([
       {
         buttonName: 'Раздавай!',
-        eventType: 'start_dealing'
+        eventType: 'start_dealing',
+        disabled: true
       }
     ]);
   }
@@ -209,6 +210,7 @@ export class GameDataService {
     if (this.balanceSource.value - amount >= 0) {
       this.balanceSource.next(this.balanceSource.value - amount);
       this.betSource.next(this.betSource.value + amount);
+      this.buttonsSource.value[0].disabled = false;
     } else {
       console.log('Whoops! Something went wrong');
     }
