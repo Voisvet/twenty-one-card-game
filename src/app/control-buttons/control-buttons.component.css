@@ -23,3 +23,10 @@
   background-color: #005e00;
   border-color: #003c00;
 }
+
+.control-button:disabled {
+  background-color: #aaa;
+  border-color: #999;
+  color: #444;
+  cursor: auto;
+}
