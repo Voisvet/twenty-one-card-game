@@ -55,7 +55,6 @@ export class GameDataService {
   private dealerPoints: number;
 
   private static recalculatePoints(hand: Card[]): number {
-    console.log(hand);
     let aceCost = 11;
     let sum = hand.reduce((previousValue, currentValue) => {
       return previousValue + (currentValue.value === 'ACE' ? aceCost : GameDataService.points[currentValue.value]);
@@ -138,10 +137,16 @@ export class GameDataService {
       this.dealerHandSource.value.push(cards[1]);
       this.playerHandSource.value.push(cards[2]);
       this.playerHandSource.value.push(cards[3]);
-    });
 
-    this.playerPoints = GameDataService.recalculatePoints(this.playerHandSource.value);
-    this.dealerPoints = GameDataService.recalculatePoints(this.dealerHandSource.value);
+      this.playerPoints = GameDataService.recalculatePoints(this.playerHandSource.value);
+      this.dealerPoints = GameDataService.recalculatePoints(this.dealerHandSource.value);
+
+      // Process case when player has BlackJack from the start
+      console.log('Player points ' + this.playerPoints);
+      if (this.playerPoints === 21) {
+        this.blackJack();
+      }
+    });
 
     this.messageSource.next('Хорошей игры!');
 
@@ -160,11 +165,6 @@ export class GameDataService {
         eventType: 'stop'
       }
     ]);
-
-    // Process case when player has BlackJack from the start
-    if (this.playerPoints === 21) {
-      this.blackJack();
-    }
   }
 
   getCard() {
