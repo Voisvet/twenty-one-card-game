@@ -108,6 +108,17 @@ export class GameDataService {
   }
 
   startGame() {
+    if (this.balanceSource.value === 0) {
+      this.messageSource.next('Кажется, вы всё проиграли. Может быть, в другой раз повезёт больше.');
+      this.buttonsSource.next([]);
+
+      this.playerHandSource.next([]);
+      this.dealerHandSource.next([]);
+
+      this.betSource.next(0);
+      return;
+    }
+
     this.isGameStartedSource.next(true);
     this.deckApiService.reshuffleDeck().subscribe();
 
