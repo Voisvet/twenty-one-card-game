@@ -42,6 +42,12 @@ a:hover, a:focus {
   margin: 48px 16px;
 }
 
+@media screen and (max-width: 480px) {
+  .container {
+    margin: 16px;
+  }
+}
+
 button::-moz-focus-inner,
 input[type="reset"]::-moz-focus-inner,
 input[type="button"]::-moz-focus-inner,
