@@ -94,6 +94,7 @@ export class GameDataService {
         this.startDealing();
         break;
       case 'double_bet':
+        this.doubleBet();
         break;
       case 'get_card':
         this.getCard();
@@ -142,7 +143,6 @@ export class GameDataService {
       this.dealerPoints = GameDataService.recalculatePoints(this.dealerHandSource.value);
 
       // Process case when player has BlackJack from the start
-      console.log('Player points ' + this.playerPoints);
       if (this.playerPoints === 21) {
         this.blackJack();
       }
@@ -255,6 +255,27 @@ export class GameDataService {
         }
       ]);
     }
+  }
+
+  doubleBet() {
+    this.balanceSource.next(this.balanceSource.value - this.betSource.value);
+    this.betSource.next(2 * this.betSource.value);
+
+
+    this.deckApiService.drawCards().subscribe(
+      cards => {
+        this.playerHandSource.value.push(cards[0]);
+        this.playerPoints = GameDataService.recalculatePoints(this.playerHandSource.value);
+        if (this.playerPoints < 21) {
+          this.messageSource.next('Вы собрали ' + GameDataService.generatePointsMessage(this.playerPoints));
+          this.stopDrawing();
+        } else if (this.playerPoints === 21) {
+          this.blackJack();
+        } else {
+          this.tooMuch();
+        }
+      }
+    );
   }
 
   clearHand(hand: Card[]) {
