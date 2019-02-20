@@ -148,7 +148,8 @@ export class GameDataService {
     this.buttonsSource.next([
       {
         buttonName: 'Удвоить',
-        eventType: 'double_bet'
+        eventType: 'double_bet',
+        disabled: this.balanceSource.value < this.betSource.value
       },
       {
         buttonName: 'Карту!',
@@ -159,6 +160,11 @@ export class GameDataService {
         eventType: 'stop'
       }
     ]);
+
+    // Process case when player has BlackJack from the start
+    if (this.playerPoints === 21) {
+      this.blackJack();
+    }
   }
 
   getCard() {
@@ -178,6 +184,19 @@ export class GameDataService {
   }
 
   blackJack() {
+    this.showFirstDealerCardSource.next(true);
+    if (this.dealerPoints === 21) {
+      // Dealer also has blackjack, just return bet
+      const newBalance = this.balanceSource.value + this.betSource.value;
+      this.balanceSource.next(newBalance);
+      this.betSource.next(0);
+    } else {
+      // Dealer does not have blackjack, give player prize that is 1.5 times more than initial bet
+      const newBalance = Math.ceil(this.balanceSource.value + 1.5 * this.betSource.value);
+      this.balanceSource.next(newBalance);
+      this.betSource.next(0);
+    }
+
     this.messageSource.next('Вы собрали блекджек! Ещё одну?');
 
     this.buttonsSource.next([
