@@ -9,7 +9,7 @@
       <img
         class="card"
         [ngStyle]="{'left': getOffsetOfCard(i)}"
-        src="https://deckofcardsapi.com/static/img/{{card.code}}.png"
+        [src]="card.image"
         alt="card">
     </ng-template>
   </ng-container>
