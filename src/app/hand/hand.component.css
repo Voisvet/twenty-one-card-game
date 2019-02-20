@@ -10,3 +10,14 @@
   white-space: nowrap;
   transition: width 1s;
 }
+
+@media screen and (max-width: 480px) {
+  .card {
+    width: 100px;
+  }
+
+  .hand {
+    width: 100px;
+    height: 142px;
+  }
+}

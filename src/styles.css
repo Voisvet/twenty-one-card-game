@@ -39,6 +39,7 @@ a:hover, a:focus {
 .container {
   max-width: 1200px;
   width: 100%;
+  margin: 48px 16px;
 }
 
 button::-moz-focus-inner,
