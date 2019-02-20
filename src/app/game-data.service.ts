@@ -219,7 +219,42 @@ export class GameDataService {
   }
 
   stopDrawing() {
-    this.clearHand(this.playerHandSource.value);
+    this.showFirstDealerCardSource.next(true);
+    if (this.dealerPoints < 17) {
+      this.deckApiService.drawCards().subscribe(
+        value => {
+          this.dealerHandSource.value.push(value[0]);
+          this.dealerPoints = GameDataService.recalculatePoints(this.dealerHandSource.value);
+          setTimeout(() => this.stopDrawing(), 1000);
+        }
+      );
+    } else {
+      if (this.dealerPoints > 21) {
+        const newBalance = this.balanceSource.value + 2 * this.betSource.value;
+        this.balanceSource.next(newBalance);
+        this.betSource.next(0);
+        this.messageSource.next('Многовато я набрал, однако... Ещё раздачу?');
+      } else if (this.playerPoints < this.dealerPoints) {
+        this.messageSource.next('Моя взяла. Ещё раздачу?');
+      } else if (this.playerPoints === this.dealerPoints) {
+        const newBalance = this.balanceSource.value + this.betSource.value;
+        this.balanceSource.next(newBalance);
+        this.betSource.next(0);
+        this.messageSource.next('Поровну, остаёмся при своих. Ещё раздачу?');
+      } else {
+        const newBalance = this.balanceSource.value + 2 * this.betSource.value;
+        this.balanceSource.next(newBalance);
+        this.betSource.next(0);
+        this.messageSource.next('Ваша ставка сыграла. Ещё раздачу?');
+      }
+
+      this.buttonsSource.next([
+        {
+          buttonName: 'Давай!',
+          eventType: 'game_start'
+        }
+      ]);
+    }
   }
 
   clearHand(hand: Card[]) {
