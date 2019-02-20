@@ -18,13 +18,13 @@ export class HandComponent implements OnInit {
   }
 
   getOffsetOfCard(i: number): string {
-    const baseWidth = window.matchMedia('(max-width: 480px)') ? 50 : 60;
+    const baseWidth = window.matchMedia('(max-width: 480px)').matches ? 50 : 60;
     return '-' + (i * baseWidth) + 'px';
   }
 
   getHandWidth(): string {
     if (this.cards) {
-      const baseWidth = window.matchMedia('(max-width: 480px)') ? 50 : 60;
+      const baseWidth = window.matchMedia('(max-width: 480px)').matches ? 50 : 60;
       return '' + (this.cards.length * baseWidth + baseWidth) + 'px';
     } else {
       return '1px';
