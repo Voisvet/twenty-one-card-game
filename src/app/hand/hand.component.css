@@ -18,6 +18,6 @@
 
   .hand {
     width: 100px;
-    height: 142px;
+    height: auto;
   }
 }
